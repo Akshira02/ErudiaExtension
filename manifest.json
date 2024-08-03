@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Erudia",
+  "description": "Make Erudia your default search engine.",
+  "version": "1.0",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Erudia",
+      "keyword": "erudia",
+      "search_url": "https://erudiasearch.com/search?method=index&q={searchTerms}",
+      "favicon_url": "https://erudiasearch.com/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://erudiasearch.com/*"],
+      "css": ["styles.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "128.png",
+      "48": "128.png",
+      "128": "128.png"
+    }
+  }
+}
