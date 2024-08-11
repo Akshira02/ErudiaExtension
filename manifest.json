@@ -16,9 +16,6 @@
       "is_default": true
     }
   },
-  "chrome_url_overrides": {
-    
-  },
   "content_scripts": [
     {
       "matches": ["https://erudiasearch.com/*"],
