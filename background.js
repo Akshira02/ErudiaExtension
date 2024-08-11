@@ -1,15 +1,17 @@
 chrome.tabs.onCreated.addListener(function(tab) {
-    // Check if the tab is the default new tab (empty, undefined, or chrome://newtab/)
-    if (tab.url === 'chrome://newtab/' || tab.url === '' || tab.url === undefined) {
+    // Check if the tab URL is undefined or the default new tab page, and not already on ErudiaSearch
+    if ((tab.url === 'chrome://newtab/' || tab.url === '' || tab.url === undefined) &&
+        (!tab.pendingUrl || !tab.pendingUrl.startsWith("https://erudiasearch.com"))) {
         chrome.tabs.update(tab.id, { url: "https://erudiasearch.com" });
     }
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    // If the tab is being updated and the URL is blank or undefined, redirect to ErudiaSearch.
-    if (changeInfo.status === 'loading' && (tab.url === '' || tab.url === undefined)) {
+    // Avoid redirection loop and only redirect if the tab is loading and not a Chrome internal page
+    if (changeInfo.status === 'loading' &&
+        (tab.url === 'chrome://newtab/' || tab.url === '' || tab.url === undefined) &&
+        (!tab.pendingUrl || !tab.pendingUrl.startsWith("https://erudiasearch.com"))) {
         chrome.tabs.update(tabId, { url: "https://erudiasearch.com" });
     }
 });
-
   
