@@ -1,5 +1,4 @@
-// content.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Any custom JavaScript needed
-  });
-  
+// Check if this is a new tab and redirect to ErudiaSearch
+if (window.location.href === 'chrome://newtab/') {
+    window.location.href = "https://erudiasearch.com";
+}
