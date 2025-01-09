@@ -16,9 +16,6 @@
       "is_default": true
     }
   },
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"  // Override the New Tab page
-  },
   "permissions": ["tabs"], 
   "content_scripts": [
     {
